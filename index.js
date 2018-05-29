@@ -34,7 +34,7 @@ const getDomain = require('./utils');
   });*/
   await client.on('Network.requestWillBeSent', async e => {
      requests[e.request.url] = e.initiator;
-     console.log(getDomain(e.request.url), " :: ",e.request.url);
+    // console.log(getDomain(e.request.url), " :: ",e.request.url);
      if(e.initiator.hasOwnProperty('stack')){
        //console.log( e.initiator.stack.callFrames[0])
      }
