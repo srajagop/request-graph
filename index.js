@@ -40,7 +40,7 @@ const getDomain = require('./utils');
      }
   });
 
-  await page.goto('https://www.nike.com/us/en_us/', {waitUntil: 'networkidle2'});
+  await page.goto('https://news.ycombinator.com/', {waitUntil: 'networkidle2'});
   //await page.pdf({path: 'hn.pdf', format: 'A4'});
   //console.log(requests);
   await browser.close();
