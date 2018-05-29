@@ -11,11 +11,16 @@ const getDomain = require('./utils');
   await client.send('Network.enable');
 
   await client.on('Network.requestWillBeSent', async e => {
-     requests[e.request.url] = e.initiator;
+    requests[e.request.url] = e.initiator;
+    let domainName = getDomain(e.request.url);
+    if(domainName){
+      requestMap[domainName] = new Link(domainName, e);
+    }
+    
     // console.log(getDomain(e.request.url), " :: ",e.request.url);
-     if(e.initiator.hasOwnProperty('stack')){
+    if(e.initiator.hasOwnProperty('stack')){
        //console.log( e.initiator.stack.callFrames[0])
-     }
+    }
   });
 
   await page.goto('https://news.ycombinator.com/', {waitUntil: 'networkidle2'});

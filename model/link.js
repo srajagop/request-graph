@@ -1,14 +1,19 @@
 class Link {
-    constructor(label, request){
+    constructor(label, requestEvent){
         this.id = label;
-        this.value = 0;
+        this.value = 1;
         this.label = label;
-        this.request = request;
+        this.requestEvent = requestEvent;
         this.color = '';
+        this.initiator = requestEvent.initator;
     }
 
     setGrpColor() {
         this.color = `hsl(${Math.floor(Math.random() * (360 - 0 + 1)) + 0}, 99%, 50%)`;
+    }
+
+    incrementSize() {
+        this.value++;
     }
 }
 
