@@ -9,6 +9,7 @@
   "author": "srajagop",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^1.4.0"
+    "open": "^6.2.0",
+    "puppeteer": "^1.15.0"
   }
 }

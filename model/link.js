@@ -1,11 +1,16 @@
 class Link {
     constructor(label, requestEvent){
         this.id = label;
-        this.value = 1;
         this.label = label;
         this.requestEvent = requestEvent;
         this.color = '';
+        this.url = requestEvent.request.url;
         this.initiator = requestEvent.initator;
+        this.initiatorStackObject;
+
+        if(requestEvent.initiator.hasOwnProperty('stack')){
+            this.initiatorStackObject =  requestEvent.initiator.stack.callFrames[0];
+        }
     }
 
     setGrpColor() {
