@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html><head>
   <meta charset="utf-8">
-  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400|Source+Code+Pro:300,500' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link href='https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css' rel='stylesheet' type='text/css'>
   <style>  
     html, body {
-      font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: 100;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
       position: relative;
       background: #2f2f2f;
       margin:0;
@@ -86,7 +86,7 @@
         {from: 5, to: 3, value: 1, title: '1 emails per week'},
         {from: 2, to: 7, value: 4, title: '4 emails per week'}
       ];*/
-      edges = [];
+      edges = <!---@@edges@@-->;
 
       // Instantiate our network object.
       var container = document.getElementById('network');
@@ -95,18 +95,43 @@
         edges: edges
       };
       var options = {
-        nodes: {
-          shape: 'dot',
-          scaling:{
-            label: {
-              min:16,
-              max:24
-            }
+          interaction: {
+              keyboard: {
+                  enabled: true
+              },
+              navigationButtons: true,
+
           },
-          font: {
-            color: 'white'
+          edges: {
+              arrows: {
+                  middle: {
+                      enabled: true,
+                      scaleFactor: 0.5
+                  }
+              },
+              dashes: false,
+              hoverWidth: 2,
+              selectionWidth: 5,
+              font: {
+                  align: 'bottom'
+              }
+          },
+          nodes: {
+              size: 4,
+              borderWidthSelected: 5,
+              font: {
+                color: 'white'
+              }
+          },
+          physics: {
+              repulsion: {
+                  centralGravity: 0
+              },
+              solver: 'repulsion',
+              stabilization: {
+                  iterations: 2500
+              }
           }
-        }
       };
       network = new vis.Network(container, data, options);
     }

@@ -59,11 +59,13 @@ const open        = require('open');
   /*const readFile = util.promisify(fs.readFile);
   const writeFile = util.promisify(fs.writeFile)*/
   Object.keys(domainMap).forEach((key, index)=>{
+    
     nodes.push({'id': key, 'value': domainMap[key].getCount(), 'label': key, 'shape': 'dot', /*'color': domainMap[key].getColor(),*/ 'size':domainMap[key].getCount(), 'group': domainMap[key].group});
+    edges.push({'from': domainMap[key].group, 'to': domainMap[key].domainName, 'value': domainMap[key].requestCount})
   });
 
   var data = fs.readFileSync('./template/template.html', {encoding: 'utf8'});
-  var result = data.replace(/<!---@@nodes@@-->/g, JSON.stringify(nodes));
+  var result = data.replace(/<!---@@nodes@@-->/g, JSON.stringify(nodes)).replace(/<!---@@edges@@-->/g, JSON.stringify(edges) );
 
   fs.writeFileSync('./output/output.html', result, {encoding: 'utf8'});
   console.log('DONE')
