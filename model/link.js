@@ -1,3 +1,5 @@
+const Utils = require('../utils/utils');
+
 class Link {
     constructor(label, requestEvent){
         this.id = label;
@@ -5,9 +7,14 @@ class Link {
         this.requestEvent = requestEvent;
         this.color = '';
         this.url = requestEvent.request.url;
-        this.initiator = requestEvent.initator;
         this.initiatorStackObject;
+        this.initiator;
+        this.initiatorDomain;
 
+        if(requestEvent.initiator.hasOwnProperty('url')){
+            this.initiator = requestEvent.initiator.url;
+            this.initiatorDomain = Utils.getDomain(this.initiator);
+        }
         if(requestEvent.initiator.hasOwnProperty('stack')){
             this.initiatorStackObject =  requestEvent.initiator.stack.callFrames[0];
         }

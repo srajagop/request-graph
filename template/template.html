@@ -8,7 +8,7 @@
       font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 100;
       position: relative;
-      background: #6A4A3C;
+      background: #2f2f2f;
       margin:0;
       padding:0;
       color: #fff;
@@ -19,7 +19,7 @@
       width: 100%;
     }
     .content {
-      animation: content 4s;
+      animation: content 3s;
       height: 100vh;
     }
     .content img {
@@ -29,7 +29,7 @@
   @keyframes background {
       0% { background-color:#000; }
     20% { background-color:#000; }
-    100% { background-color:#6A4A3C; }
+    100% { background-color:#2f2f2f; }
   }
 
   @keyframes content {
@@ -99,9 +99,12 @@
           shape: 'dot',
           scaling:{
             label: {
-              min:8,
-              max:20
+              min:16,
+              max:24
             }
+          },
+          font: {
+            color: 'white'
           }
         }
       };
