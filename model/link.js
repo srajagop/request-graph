@@ -7,17 +7,7 @@ class Link {
         this.requestEvent = requestEvent;
         this.color = '';
         this.url = requestEvent.request.url;
-        this.initiatorStackObject;
-        this.initiator;
-        this.initiatorDomain;
-
-        if(requestEvent.initiator.hasOwnProperty('url')){
-            this.initiator = requestEvent.initiator.url;
-            this.initiatorDomain = Utils.getDomain(this.initiator);
-        }
-        if(requestEvent.initiator.hasOwnProperty('stack')){
-            this.initiatorStackObject =  requestEvent.initiator.stack.callFrames[0];
-        }
+        this.initiator = Utils.getInitiator(requestEvent);
     }
 
     setGrpColor() {

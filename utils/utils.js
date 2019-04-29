@@ -16,7 +16,22 @@ function getDomainName(url) {
     return new URL(url).hostname;
 }
 
+function getInitiator(requestEvent){
+    if(requestEvent.initiator.url){
+        return getDomainName(requestEvent.initiator.url);           
+    } 
+    if(requestEvent.initiator.stack){
+        return getDomainName(requestEvent.initiator.stack.callFrames[0].url);             
+    } 
+    if(requestEvent.initiator.type == 'other') {
+        if(requestEvent.request.headers.Referer) return getDomainName(requestEvent.request.headers.Referer); 
+    } else {
+        console.log("no referrer for url", requestEvent.request.url)
+        return requestEvent.request.url;       
+    }  
+}
 module.exports = {
     colorPalette: colorPalette,
-    getDomain: getDomainName
+    getDomain: getDomainName,
+    getInitiator: getInitiator
 };

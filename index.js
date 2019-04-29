@@ -29,24 +29,13 @@ const open        = require('open');
         if(domainName == siteDomain) {
           referer = siteDomain;
         } else {
-          
-          if(e.initiator.url){
-            referer = Utils.getDomain(e.initiator.url);           
-          } else if(e.initiator.stack){
-            referer = Utils.getDomain(e.initiator.stack.callFrames[0].url);             
-          } else if(e.initiator.type == 'other') {
-            referer = Utils.getDomain(e.request.headers.Referer); 
-          } else {
-            console.log("no referrer for url", e.request.url)
-          }        
-
+          referer = Utils.getInitiator(e);
           console.log('domainName', domainName, referer)
         }
         domainMap[domainName] = new Domain(domainName, referer);      
       } 
       requests.push(new Link(domainName, e));   
     }
-    //console.log(getDomain(e.request.url), " :: ",e.request.url, " :: ");
    
   });
   console.log('Collecting data....');
@@ -58,8 +47,7 @@ const open        = require('open');
   var edges = [];
   /*const readFile = util.promisify(fs.readFile);
   const writeFile = util.promisify(fs.writeFile)*/
-  Object.keys(domainMap).forEach((key, index)=>{
-    
+  Object.keys(domainMap).forEach((key, index)=>{    
     nodes.push({'id': key, 'value': domainMap[key].getCount(), 'label': key, 'shape': 'dot', /*'color': domainMap[key].getColor(),*/ 'size':domainMap[key].getCount(), 'group': domainMap[key].group});
     edges.push({'from': domainMap[key].group, 'to': domainMap[key].domainName, 'value': domainMap[key].requestCount})
   });
