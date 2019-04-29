@@ -1,3 +1,8 @@
 # request-graph
 
-WIP....
+Installation
+npm install
+
+Usage 
+node index https://linktowebsite
+

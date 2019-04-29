@@ -6,12 +6,18 @@ const fs          = require('fs');
 const util        = require('util');
 const open        = require('open');
 (async () => {
-  
+  let siteLink    = "";
+  var appArgs = process.argv.slice(2);
+  if(appArgs.length == 0){
+    console.error("Provide a website link")
+    return;
+  }
+  siteLink        = appArgs[0]; 
   const browser   = await puppeteer.launch();
   const page      = await browser.newPage();
   let requests    = [];
   let domainMap   = {};
-  let siteLink    = "https://www.nike.com/";
+ 
   let siteDomain  = Utils.getDomain(siteLink);
   const client    = await page.target().createCDPSession();
 
