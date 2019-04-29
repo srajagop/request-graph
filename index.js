@@ -59,7 +59,9 @@ const open        = require('open');
   });
 
   var data = fs.readFileSync('./template/template.html', {encoding: 'utf8'});
-  var result = data.replace(/<!---@@nodes@@-->/g, JSON.stringify(nodes)).replace(/<!---@@edges@@-->/g, JSON.stringify(edges) );
+  var result = data.replace(/<!---@@nodes@@-->/g, JSON.stringify(nodes) )
+  .replace(/<!---@@edges@@-->/g, JSON.stringify(edges) )
+  .replace(/<!---@@links@@-->/g, JSON.stringify(requests) );
 
   fs.writeFileSync('./output/output.html', result, {encoding: 'utf8'});
   console.log('DONE')
