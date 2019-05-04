@@ -55,7 +55,7 @@ const open        = require('open');
   const writeFile = util.promisify(fs.writeFile)*/
   Object.keys(domainMap).forEach((key, index)=>{    
     nodes.push({'id': key, 'value': domainMap[key].getCount(), 'label': key, 'shape': 'dot', /*'color': domainMap[key].getColor(),*/ 'size':domainMap[key].getCount(), 'group': domainMap[key].group});
-    edges.push({'from': domainMap[key].group, 'to': domainMap[key].domainName, 'value': domainMap[key].requestCount})
+    edges.push({'from': domainMap[key].group, 'to': domainMap[key].domainName, 'title': domainMap[key].requestCount +' requests from '+ domainMap[key].group + ' to '+ domainMap[key].domainName})
   });
 
   var data = fs.readFileSync('./template/template.html', {encoding: 'utf8'});
